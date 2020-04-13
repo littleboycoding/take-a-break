@@ -1,11 +1,11 @@
-const version = "1";
+const version = "2";
 const cache_name = "Take a Break v" + version;
 let file_to_cache = [
-  "/",
-  "/index.html",
-  "/stylesheet.css",
+  "",
+  "index.html",
+  "stylesheet.css",
   "https://cdn.jsdelivr.net/npm/vue/dist/vue.js",
-  "/helpText.txt",
+  "helpText.txt",
 ];
 
 // async function GifFetcher() {
@@ -26,7 +26,7 @@ self.addEventListener("fetch", (event) => {
       if (res) {
         return res;
       }
-      return fetch(event.request);
+      return fetch("take-a-break/" + event.request);
     })
   );
 });

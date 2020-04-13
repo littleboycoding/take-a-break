@@ -59,7 +59,7 @@
         };
       },
       async created() {
-        let helpText = await fetch("/helpText.txt").then((res) => res.text());
+        let helpText = await fetch("helpText.txt").then((res) => res.text());
         this.help = helpText.split("\n");
       },
       computed: {
