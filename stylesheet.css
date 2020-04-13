@@ -1,0 +1,31 @@
+/* Font Kanit from Google font */
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: Kanit, sans-serif;
+}
+.text {
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 2.5vw;
+  white-space: nowrap;
+}
+.resetBT {
+  border: 0.15vw solid black;
+  padding: none;
+  font-size: 2vw;
+  border-radius: 3px;
+}
+.resetBT:hover {
+  cursor: pointer;
+  background-color: #999;
+  transition: background-color 0.07s;
+}
+.warning {
+  color: red;
+  font-size: 1.75vw;
+}

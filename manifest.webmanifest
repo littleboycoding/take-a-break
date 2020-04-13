@@ -1,0 +1,20 @@
+{
+  "name": "Take a Break",
+  "short_name": "Take a Break",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/128",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#3E4EB8",
+  "theme_color": "#2F3BA2"
+}
