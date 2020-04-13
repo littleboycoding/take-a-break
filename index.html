@@ -108,10 +108,13 @@
 
             //Get random lovely cat picture from thecatapi
             const catapi = `https://api.thecatapi.com/v1/images/search`;
-            this.fetchedGif = await fetch(catapi).then((res) => res.json());
+            this.fetchedGif = await fetch(catapi)
+              .then((res) => res.json())
+              .catch((err) => "error");
 
             let notification = new Notification("Take a Break", {
-              image: this.fetchedGif[0]["url"],
+              image:
+                this.fetchedGif !== "error" ? this.fetchedGif[0]["url"] : "",
               body: `You have sat for ${this.timeLimit} mintues ! Get up take some break 🎉`,
             });
           }
