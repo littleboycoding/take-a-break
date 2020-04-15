@@ -1,5 +1,7 @@
 # Take a Break ⏰
 
+![In action](https://i.imgur.com/lw92ndY.png)
+
 App to help notify time to take a break to keep you healthy, Designed for developer 💻
 
 ## How it's work ?
