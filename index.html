@@ -21,7 +21,7 @@
 		/>
 		<link
 			rel="apple-touch-icon"
-			href="/images/icons/icon-152x152.png"
+			href="https://via.placeholder.com/152?Take%20a%20Break"
 		/>
 
 		<meta
@@ -38,11 +38,14 @@
 	</head>
 	<body>
 		<div id="app">
-			<text-box v-if="!isTime">
+			<text-box
+				v-if="!isTime"
+				:notification="notificationState"
+			>
 				You have been sitting 💺 for {{timer}} minutes
 				now 🕐
 			</text-box>
-			<text-box v-else>
+			<text-box v-else :notification="notificationState">
 				You have sat for {{timeLimit}} minutes long !
 				Get up, take some break 🎉
 				<br /><help-text></help-text>
@@ -52,121 +55,5 @@
 			</text-box>
 		</div>
 	</body>
-	<script>
-		Vue.component("text-box", {
-			template:
-				"<div class='text'><slot></slot><br/><br/><warning></warning></div>"
-		});
-
-		Vue.component("warning", {
-			template:
-				"<span class='warning' v-if='!notificationGranted'>We can't notify you because you aren't allow us to, Please change setting if you change your mind.</span>",
-			computed: {
-				notificationGranted() {
-					return Notification.permission ===
-						"granted"
-						? true
-						: false;
-				}
-			}
-		});
-
-		Vue.component("help-text", {
-			data() {
-				return {
-					help: []
-				};
-			},
-			async created() {
-				let helpText = await fetch(
-					"helpText.txt"
-				).then(res => res.text());
-				this.help = helpText.split("\n");
-			},
-			computed: {
-				randomComputed() {
-					const randomIndex = Math.floor(
-						Math.random() *
-							(this.help.length - 0.1)
-					);
-					return this.help[randomIndex];
-				}
-			},
-			template:
-				'<span style="font-size: 2vw">\> {{randomComputed}}</span>'
-		});
-
-		let vm = new Vue({
-			el: "#app",
-			async mounted() {
-				//assume that 1000 ms = 1 min for now...
-				const ms = 1000; //60000 = 1 min
-				if (!"Notification" in window) {
-					alert(
-						"Your browser doesn't not supported notification, So we can't send notify to you."
-					);
-				} else if (
-					Notification.permission !== "granted" &&
-					Notification.permission !== "denied"
-				) {
-					await Notification.requestPermission();
-				}
-				setInterval(this.timeForward, ms);
-			},
-			data: {
-				timer: 0, //minute
-				alreadyNotify: false, //prevent notification to appear more than one
-				timeLimit: 5,
-				fetchedGif: {}
-			},
-			methods: {
-				async timeForward() {
-					if (this.timer < this.timeLimit) {
-						this.timer += 1;
-					} else if (
-						!this.alreadyNotify &&
-						Notification.permission ===
-							"granted"
-					) {
-						this.alreadyNotify = true;
-
-						//Get random lovely cat picture from thecatapi
-						const catapi = `https://api.thecatapi.com/v1/images/search`;
-						this.fetchedGif = await fetch(
-							catapi
-						)
-							.then(res => res.json())
-							.catch(err => "error");
-
-						let notification = new Notification(
-							"Take a Break",
-							{
-								image:
-									this
-										.fetchedGif !==
-									"error"
-										? this
-												.fetchedGif[0][
-												"url"
-										  ]
-										: "",
-								body: `You have sat for ${this.timeLimit} mintues ! Get up take some break 🎉`
-							}
-						);
-					}
-				},
-				timeReset() {
-					this.timer = 0;
-					this.alreadyNotify = false;
-				}
-			},
-			computed: {
-				isTime() {
-					return this.timer == this.timeLimit
-						? true
-						: false;
-				}
-			}
-		});
-	</script>
+	<script src="mainVue.js"></script>
 </html>
