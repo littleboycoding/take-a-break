@@ -1,64 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-		<title>Take a Break</title>
+    <title>Take a Break</title>
 
-		<!-- Safari compaitibility -->
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta
-			name="apple-mobile-web-app-status-bar-style"
-			content="black"
-		/>
-		<meta
-			name="apple-mobile-web-app-title"
-			content="Take a Break"
-		/>
-		<link
-			rel="apple-touch-icon"
-			href="https://via.placeholder.com/152?Take%20a%20Break"
-		/>
+    <!-- Safari compaitibility -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Take a Break" />
+    <link
+      rel="apple-touch-icon"
+      href="https://via.placeholder.com/152?Take%20a%20Break"
+    />
 
-		<meta
-			name="description"
-			content="App to help notify time to take some break"
-		/>
-		<meta name="theme-color" content="#FFFFFF" />
-		<link
-			rel="icon"
-			href="https://via.placeholder.com/64?Take%20a%20Break"
-		/>
+    <meta
+      name="description"
+      content="App to help notify time to take some break"
+    />
+    <meta name="theme-color" content="#FFFFFF" />
+    <link
+      rel="icon"
+      href="https://via.placeholder.com/64?text=Take%20a%20Break"
+    />
 
-		<!-- PWA necsseary script -->
-		<link rel="manifest" href="manifest.webmanifest" />
-		<script src="app.js"></script>
+    <!-- PWA necsseary script -->
+    <link rel="manifest" href="manifest.webmanifest" />
+    <script src="app.js"></script>
 
-		<link rel="stylesheet" href="stylesheet.css" type="text/css" />
-	</head>
-	<body>
-		<div id="app">
-			<text-box
-				v-if="!isTime"
-				:notification="notificationState"
-			>
-				You have been sitting 🪑 for {{timer}} minutes
-				now 🕐
-			</text-box>
-			<text-box v-else :notification="notificationState">
-				You have sat for {{timeLimit}} minutes long !
-				Get up, take some break 🎉
-				<br /><help-text></help-text>
-				<button @click="timeReset" class="resetBT">
-					Got it
-				</button>
-			</text-box>
-		</div>
-	</body>
-	<script src="mainVue.js"></script>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+  </head>
+  <body>
+    <div id="app">
+      <text-box v-if="!isTime" :notification="notificationState">
+        You have been sitting 🪑 for {{ timer }} minutes now 🕐
+      </text-box>
+      <text-box v-else :notification="notificationState">
+        You have sat for {{ timeLimit }} minutes long ! Get up, take some break
+        🎉 <br /><help-text></help-text>
+        <button @click="timeReset" class="resetBT">
+          Got it
+        </button>
+      </text-box>
+    </div>
+  </body>
+  <script src="mainVue.js"></script>
 </html>
