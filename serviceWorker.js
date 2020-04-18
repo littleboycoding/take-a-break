@@ -1,6 +1,6 @@
 //Setting
-const version = "3";
-const devlopement = true;
+const version = "3.1";
+const devlopement = false;
 
 const cache_name = "Take a Break v" + version;
 let file_to_cache = [
