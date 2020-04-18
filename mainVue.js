@@ -38,7 +38,7 @@ let vm = new Vue({
   el: "#app",
   async mounted() {
     //assume that 1000 ms = 1 min for now...
-    const ms = 1000; //60000 = 1 min
+    const ms = 60000; //60000 = 1 min
     if (!"Notification" in window) {
       alert(
         "Your browser doesn't not supported notification, So we can't send notify to you."
@@ -55,7 +55,7 @@ let vm = new Vue({
   data: {
     timer: 0, //minute
     alreadyNotify: false, //prevent notification to appear more than one
-    timeLimit: 5,
+    timeLimit: 30,
     fetchedGif: {},
     notificationState: "",
   },

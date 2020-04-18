@@ -1,5 +1,5 @@
 //Setting
-const version = "1";
+const version = "3";
 const devlopement = true;
 
 const cache_name = "Take a Break v" + version;
