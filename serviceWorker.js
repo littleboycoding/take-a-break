@@ -1,11 +1,16 @@
-const version = "2";
+//Setting
+const version = "1";
+const devlopement = true;
+
 const cache_name = "Take a Break v" + version;
 let file_to_cache = [
   ".",
   "index.html",
   "mainVue.js",
   "stylesheet.css",
-  "https://cdn.jsdelivr.net/npm/vue/dist/vue.js",
+  devlopement
+    ? "https://cdn.jsdelivr.net/npm/vue/dist/vue.js"
+    : "https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js",
   "helpText.txt",
 ];
 
@@ -27,6 +32,7 @@ self.addEventListener("fetch", (event) => {
 });
 
 self.addEventListener("activate", (event) => {
+  self.clients.claim();
   event.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(
@@ -36,6 +42,31 @@ self.addEventListener("activate", (event) => {
           }
         })
       );
+    })
+  );
+});
+
+self.addEventListener("message", function (event) {
+  const { action, title, image, body } = event.data;
+  if (action === "notification") {
+    self.registration.showNotification(title, {
+      image: image,
+      body: body,
+      actions: [{ action: "Got it", title: "Got it", icon: "" }],
+    });
+  }
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(
+    clients.matchAll().then((clients) => {
+      for (client of clients) {
+        if ("focus" in client) {
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) clients.openWindow("/");
     })
   );
 });

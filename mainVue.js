@@ -38,7 +38,7 @@ let vm = new Vue({
   el: "#app",
   async mounted() {
     //assume that 1000 ms = 1 min for now...
-    const ms = 60000; //60000 = 1 min
+    const ms = 1000; //60000 = 1 min
     if (!"Notification" in window) {
       alert(
         "Your browser doesn't not supported notification, So we can't send notify to you."
@@ -55,7 +55,7 @@ let vm = new Vue({
   data: {
     timer: 0, //minute
     alreadyNotify: false, //prevent notification to appear more than one
-    timeLimit: 30,
+    timeLimit: 5,
     fetchedGif: {},
     notificationState: "",
   },
@@ -70,12 +70,16 @@ let vm = new Vue({
         const catapi = `https://api.thecatapi.com/v1/images/search`;
         this.fetchedGif = await fetch(catapi)
           .then((res) => res.json())
-          .catch((err) => "error");
+          .catch(() => "error");
 
-        let notification = new Notification("Take a Break", {
-          image: this.fetchedGif !== "error" ? this.fetchedGif[0]["url"] : "",
-          body: `You have sat for ${this.timeLimit} mintues ! Get up take some break 🎉`,
-        });
+        if ("active" in registration) {
+          registration.active.postMessage({
+            action: "notification",
+            title: "Take a Break",
+            image: this.fetchedGif !== "error" ? this.fetchedGif[0]["url"] : "",
+            body: `You have sat for ${this.timeLimit} mintues ! Get up take some break 🎉`,
+          });
+        }
       }
     },
     timeReset() {
